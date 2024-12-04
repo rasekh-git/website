@@ -1,0 +1,42 @@
+google account creation : "https://accounts.google.com/lifecycle/steps/signup/name?continue=https://mail.google.com/mail&ddm=1&dsh=S-66733048:1733301112874762&ec=GAlAFw&flowEntry=SignUp&flowName=GlifWebSignIn&hl=en&service=mail&TL=AKOx4s3PMbkf_cA-Ss9MCXK8gFyNnQFcF6ewb5DPJ6k2iQEAFNZCzqAM8jmQzv7Z"
+
+thm sidequest:https:"https://tryhackme.com/r/room/adventofcyber24sidequest"
+
+thm quest:"https://tryhackme.com/r/room/adventofcyber2024"
+
+github repo:"https://github.com/Bloatware-WarevilleTHM/C2-Server/blob/main/app.py"
+
+command:"MACHINE_IP papash3ll.thm"
+
+refrence vid:"https://www.youtube.com/watch?v=x6cVrWZP6yE"  40:10 --- 41:40
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------"process"one"---------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------"server is running of main quest timeline day one"------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1.sudo nano etc/hosts
+2.MACHINE_IP papash3ll.thm
+3.use chatgpt to follow
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------Answer the questions below------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What is the password the attacker used to register on the site?
+Answer format: *******************
+
+
+
+What is the password that the attacker captured?
+Answer format: *******************
+
+
+
+What is the password of the zip file transferred by the attacker?
+Answer format: *********************
+
+
+
+What is McSkidy's password that was inside the database file stolen by the attacker?
+Answer format: *****************************
