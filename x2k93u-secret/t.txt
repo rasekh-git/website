@@ -4,6 +4,8 @@ thm sidequest:https:"https://tryhackme.com/r/room/adventofcyber24sidequest"
 
 thm quest:"https://tryhackme.com/r/room/adventofcyber2024"
 
+obs-drive:"https://drive.google.com/file/d/1oQBS2knXuypZV8PqrdeCQAYxjCF3i3jC/view"
+
 github repo:"https://github.com/Bloatware-WarevilleTHM/C2-Server/blob/main/app.py"
 
 command:"MACHINE_IP papash3ll.thm"
