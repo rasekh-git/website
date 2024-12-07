@@ -40,4 +40,10 @@ Day 5
 
 Day 6
 
-1.
+1.   THM{GlitchWasHere}
+2.   THM{HiddenClue}
+
+
+Day 7
+
+1.   
