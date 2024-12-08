@@ -46,4 +46,12 @@ Day 6
 
 Day 7
 
-1.   
+1.   PutObject 
+2.   53.94.201.69
+3.   signin.amazonaws.com 
+4.   2024-11-28T15:21:54Z
+5.   glitch
+6.   AdministratorAccess
+7.   53.94.201.69
+8.   31.210.15.79
+9.   2394 6912 7723 1294
