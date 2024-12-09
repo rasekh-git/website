@@ -64,4 +64,5 @@ Day 8
 
 Day 9
 
-1.   
+1.   Governance, Risk, and Compliance
+2.   THM{R15K_M4N4G3D}
