@@ -173,3 +173,222 @@ Python is a powerful tool for solving small CTF challenges.
 5. **Use Burp Suite** to intercept and analyze HTTP requests.
 
 Would you like me to help set up these tools or provide a more detailed walkthrough of one?
+
+
+
+
+Here’s a structured and categorized step-by-step guide to finding flags for each team (Red, Blue, and Purple), organized by difficulty level. Follow these workflows during the CTF.
+
+---
+
+## **Red Teaming Flags**
+
+### **Entry-Level**
+#### **1. Service Enumeration**
+- **Objective:** Identify an open port (e.g., SSH on port 22) and capture the banner flag.
+- **Steps:**
+  1. Use **Nmap** to scan for open ports:
+     ```bash
+     nmap -sV -p 22 <target-ip>
+     ```
+  2. Capture the service banner (e.g., SSH version or custom message).
+     ```bash
+     nc <target-ip> 22
+     ```
+  3. Look for a flag in the banner output.
+
+---
+
+### **Easy**
+#### **2. Directory Enumeration**
+- **Objective:** Find a hidden directory (e.g., `/admin` or `/secret`).
+- **Steps:**
+  1. Use **Gobuster** to enumerate directories:
+     ```bash
+     gobuster dir -u http://<target-ip> -w /usr/share/wordlists/dirb/common.txt
+     ```
+  2. Access discovered directories in your browser or with `curl`:
+     ```bash
+     curl http://<target-ip>/admin
+     ```
+  3. Look for flags in files or page content.
+
+---
+
+### **Intermediate**
+#### **3. Exploit a Web Input Field**
+- **Objective:** Find a vulnerable parameter (e.g., SQL injection).
+- **Steps:**
+  1. Use a web browser or Burp Suite to inspect input fields (e.g., login forms).
+  2. Test for SQL injection manually:
+     - Input `' OR '1'='1` in login fields.
+  3. Automate testing with **Sqlmap**:
+     ```bash
+     sqlmap -u "http://<target-ip>/vulnerable?param=value" --dump
+     ```
+  4. Extract a flag from the database.
+
+---
+
+### **Skilled**
+#### **4. Misconfigured Permissions**
+- **Objective:** Identify an SUID binary and escalate privileges.
+- **Steps:**
+  1. Find SUID binaries:
+     ```bash
+     find / -perm -4000 2>/dev/null
+     ```
+  2. Analyze binaries for privilege escalation opportunities.
+  3. Use escalated privileges to access the flag:
+     ```bash
+     ./<binary> cat /root/flag.txt
+     ```
+
+#### **5. Steganography**
+- **Objective:** Extract a hidden message from an image file.
+- **Steps:**
+  1. Use **Steghide** to extract hidden data:
+     ```bash
+     steghide extract -sf <image-file>
+     ```
+  2. If a password is required, use wordlists to brute force it:
+     ```bash
+     steghide extract -sf <image-file> -p <password>
+     ```
+  3. Look for the flag in the extracted file.
+
+---
+
+## **Blue Teaming Flags**
+
+### **Entry-Level**
+#### **1. Log Analysis**
+- **Objective:** Analyze logs for suspicious activity.
+- **Steps:**
+  1. View logs in `/var/log` (e.g., `auth.log`):
+     ```bash
+     cat /var/log/auth.log | grep "Failed password"
+     ```
+  2. Identify unauthorized login attempts and extract the flag.
+
+---
+
+### **Easy**
+#### **2. PCAP Analysis**
+- **Objective:** Examine a PCAP file for sensitive data.
+- **Steps:**
+  1. Open the PCAP file in **Wireshark**.
+  2. Filter HTTP POST requests:
+     ```
+     http.request.method == "POST"
+     ```
+  3. Extract sensitive data (e.g., credentials or flags).
+
+---
+
+### **Intermediate**
+#### **3. Configuration Files**
+- **Objective:** Spot a misconfigured firewall or service revealing a flag.
+- **Steps:**
+  1. Look at firewall or service config files (e.g., `iptables` rules):
+     ```bash
+     sudo iptables -L -v
+     ```
+  2. Identify rules or open ports that shouldn't exist.
+  3. The misconfiguration should lead you to the flag.
+
+---
+
+### **Skilled**
+#### **4. Detect Hidden Malware**
+- **Objective:** Identify malicious scripts or binaries.
+- **Steps:**
+  1. Search for suspicious files:
+     ```bash
+     find / -name "*.sh" -o -name "*.exe" -o -name "*.bin"
+     ```
+  2. Use `strings` or `cat` to analyze them:
+     ```bash
+     strings <file>
+     ```
+  3. Look for flagged strings or commands.
+
+#### **5. Cryptographic Decoding**
+- **Objective:** Decode an encoded flag.
+- **Steps:**
+  1. If encoded in Base64:
+     ```bash
+     echo "SGVsbG8gd29ybGQ=" | base64 -d
+     ```
+  2. If encoded with ROT13:
+     ```bash
+     echo "uryyb" | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+     ```
+
+---
+
+## **Purple Teaming Flags**
+
+### **Entry-Level**
+#### **1. Simulated Attack Detection**
+- **Objective:** Identify artifacts of a simulated attack.
+- **Steps:**
+  1. Search `auth.log` or `syslog` for SSH brute-force attempts:
+     ```bash
+     grep "sshd" /var/log/auth.log
+     ```
+  2. Look for IP addresses and extract the flag from logs.
+
+---
+
+### **Easy**
+#### **2. Firewall Rules**
+- **Objective:** Analyze rules for intentionally left-open ports.
+- **Steps:**
+  1. Check firewall rules:
+     ```bash
+     sudo iptables -L -v
+     ```
+  2. Identify any open ports not normally allowed and extract the flag.
+
+---
+
+### **Intermediate**
+#### **3. Privilege Escalation via Vulnerabilities**
+- **Objective:** Exploit a CVE in a web service.
+- **Steps:**
+  1. Enumerate service versions with **Nmap**:
+     ```bash
+     nmap -sV <target-ip>
+     ```
+  2. Search for vulnerabilities:
+     - Use `searchsploit`:
+       ```bash
+       searchsploit <service>
+       ```
+  3. Exploit the vulnerability and extract the flag.
+
+---
+
+### **Skilled**
+#### **4. Reverse Engineering**
+- **Objective:** Analyze a binary to find a hardcoded flag.
+- **Steps:**
+  1. Use **strings** or **Ghidra** to analyze the binary:
+     ```bash
+     strings <binary>
+     ```
+  2. Locate the hardcoded flag.
+
+#### **5. Data Leak Identification**
+- **Objective:** Extract a flag from a DNS query or email header.
+- **Steps:**
+  1. Use Wireshark to filter DNS traffic:
+     ```
+     dns
+     ```
+  2. Analyze queries for suspicious domains or flags.
+
+---
+
+Let me know if you’d like further details about any specific flag or step!
